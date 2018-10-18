@@ -846,8 +846,8 @@ bool findBucket(uint16_t duration, uint8_t *index)
 	for (i = 0; i < bucket_count; i++)
 	{
 		// calculate delta by the current bucket and check if the new duration fits into
-		uint16_t delta = duration / 4 + duration / 8;
-		delta = delta > buckets[i] ? buckets[i] : delta;
+		uint16_t delta = buckets[i] / 4 + buckets[i] / 8;
+		//delta = delta > buckets[i] ? buckets[i] : delta;
 
 		if (((buckets[i] - delta) < duration) && (duration < (buckets[i] + delta)))
 		{

@@ -209,9 +209,26 @@ SI_SEGMENT_VARIABLE(ALDI_RCWS, static TIMING_PROTOCOL_DATA, SI_SEG_CODE) =
 	};
 
 /*
+ * ALDI Remote controlled wall sockets, 4x
+  */
+#define DOORMAN_IDENTIFIER				0x07
+
+SI_SEGMENT_VARIABLE(DOORMAN, static TIMING_PROTOCOL_DATA, SI_SEG_CODE) =
+	{
+		420,		// SYNC_HIGH
+		7000,		// SYNC_LOW
+		210,		// PULSE_TIME
+		{ 1, 2 },	// bit0 HIGH_LOW
+		{ 2, 1 },	// bit1 HIGH_LOW
+		12,			// BIT_COUNT
+		50,
+		0			// REPEAT_DELAY
+	};
+
+/*
  * Protocol array
  */
-#define PROTOCOLCOUNT	6
+#define PROTOCOLCOUNT	7
 #if PROTOCOLCOUNT > 0x7F
 #error Too much protocols are defined, stop!
 #endif
@@ -247,6 +264,11 @@ SI_SEGMENT_VARIABLE(PROTOCOL_DATA[PROTOCOLCOUNT], static const RF_PROTOCOLS, SI_
 				ALDI_RCWS_IDENTIFIER,
 				TIMING,
 				&ALDI_RCWS
+		},
+		{
+				DOORMAN_IDENTIFIER,
+				TIMING,
+				&DOORMAN
 		}
 };
 
